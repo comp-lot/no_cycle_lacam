@@ -187,6 +187,8 @@ bool Planner::get_new_config(Node* S, Constraint* M)
     if (occupied_next[l_pre] != nullptr && occupied_now[l] != nullptr &&
         occupied_next[l_pre]->id == occupied_now[l]->id)
       return false;
+    if (is_cycle(A[i], M->where[k]))
+      return false;
 
     // set occupied_next
     A[i]->v_next = M->where[k];
@@ -233,6 +235,9 @@ bool Planner::funcPIBT(Agent* ai)
     // avoid swap conflicts with constraints
     if (ak != nullptr && ak->v_next == ai->v_now) continue;
 
+    if (is_cycle(ai, u))
+      continue;
+
     // reserve next location
     occupied_next[u->id] = ai;
     ai->v_next = u;
@@ -251,6 +256,20 @@ bool Planner::funcPIBT(Agent* ai)
   occupied_next[ai->v_now->id] = ai;
   ai->v_next = ai->v_now;
   return false;
+}
+
+bool Planner::is_cycle(Agent* ai, Vertex* u)
+{
+  Agent* ak = occupied_now[u->id];
+  if (ak == ai)
+    return false;
+
+  while (ak != nullptr && ak != ai) {
+    if (ak->v_next == nullptr)
+      return false;
+    ak = occupied_now[ak->v_next->id];
+  }
+  return ak == ai;
 }
 
 Solution solve(const Instance& ins, const int verbose, const Deadline* deadline,

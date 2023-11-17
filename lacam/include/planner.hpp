@@ -66,6 +66,8 @@ struct Planner {
   Solution solve();
   bool get_new_config(Node* S, Constraint* M);
   bool funcPIBT(Agent* ai);
+
+  bool is_cycle(Agent* ai, Vertex* u);
 };
 
 // main function
