@@ -152,13 +152,13 @@ void make_log(const Instance& ins, const Solution& solution,
   log << "map_file=" << map_recorded_name << "\n";
   log << "solver=planner\n";
   log << "solved=" << !solution.empty() << "\n";
-  log << "soc=" << get_sum_of_costs(solution) << "\n";
+  /*log << "soc=" << get_sum_of_costs(solution) << "\n";
   log << "soc_lb=" << get_sum_of_costs_lower_bound(ins, dist_table) << "\n";
   log << "makespan=" << get_makespan(solution) << "\n";
   log << "makespan_lb=" << get_makespan_lower_bound(ins, dist_table) << "\n";
   log << "sum_of_loss=" << get_sum_of_loss(solution) << "\n";
   log << "sum_of_loss_lb=" << get_sum_of_costs_lower_bound(ins, dist_table)
-      << "\n";
+      << "\n";*/
   log << "comp_time=" << comp_time_ms << "\n";
   log << "seed=" << seed << "\n";
   if (log_short) return;

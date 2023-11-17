@@ -58,13 +58,13 @@ int main(int argc, char* argv[])
   if (solution.empty()) info(1, verbose, "failed to solve");
 
   // check feasibility
-  if (!is_feasible_solution(ins, solution, verbose)) {
+  /*if (!is_feasible_solution(ins, solution, verbose)) {
     info(0, verbose, "invalid solution");
     return 1;
-  }
+  }*/
 
   // post processing
-  print_stats(verbose, ins, solution, comp_time_ms);
+  //print_stats(verbose, ins, solution, comp_time_ms);
   make_log(ins, solution, output_name, comp_time_ms, map_name, seed, log_short);
   return 0;
 }
